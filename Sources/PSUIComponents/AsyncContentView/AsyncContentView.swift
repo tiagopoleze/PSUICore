@@ -34,12 +34,13 @@ public struct AsyncContentView<Source: LoadableObject, Content: View>: View {
 }
 
 #if DEBUG
+@available(iOS 15.0, macOS 12.0, *)
 private struct Article: Identifiable {
     var id = UUID()
     var title: String
     var body: String
 }
-
+@available(iOS 15.0, macOS 12.0, *)
 private struct ArticleLoader {
     func loadArticle(withID: Article.ID, _ completion: @escaping (Result<Article, Error>) -> Void) {
         completion(.success(.init(title: "Hello, World!", body: "TIago Ferreira")))
@@ -49,7 +50,7 @@ private struct ArticleLoader {
         throw AsyncArticleError.testError
     }
 }
-
+@available(iOS 15.0, macOS 12.0, *)
 private enum AsyncArticleError: LocalizedError {
     case testError
 
