@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "pscore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://tiagopoleze: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@github.com/tiagopoleze/PSCore",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4ab916aa97c21d5b2a3b89ea8840cd4c6fad8002"
+      }
+    },
+    {
+      "identity" : "swiftlintplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://tiagopoleze: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@github.com/tiagopoleze/SwiftlintPlugin",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c28b324179517b4a7d23ffa85cfbd1e94b485577"
+      }
+    }
+  ],
+  "version" : 2
+}
