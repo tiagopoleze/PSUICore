@@ -1,12 +1,6 @@
-//
-//  OTPTextField.swift
-//  
-//
-//  Created by Tiago Ferreira on 08/05/2023.
-//
-
 import SwiftUI
 
+@available(iOS 15.0, macOS 12.0, *)
 public struct OTPTextFieldView<ActionButton: View>: View {
     @Binding private var otpText: String
     @FocusState private var isKeyboardShowing: Bool
@@ -92,6 +86,7 @@ public struct OTPTextFieldView<ActionButton: View>: View {
 }
 
 #if DEBUG
+@available(iOS 15.0, macOS 12.0, *)
 struct OTPTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
         OTPTextFieldView(otpText: .constant("123456"), otpSize: 6) {

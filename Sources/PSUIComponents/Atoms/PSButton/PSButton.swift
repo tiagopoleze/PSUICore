@@ -1,12 +1,6 @@
-//
-//  File.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 import SwiftUI
 
+@available(iOS 15.0, macOS 12.0, *)
 // swiftlint:disable file_length
 public struct PSButton: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -93,6 +87,7 @@ public struct PSButton: View {
     }
 }
 
+@available(iOS 15.0, macOS 12.0, *)
 // MARK: - Previews
 // swiftlint:disable:next type_body_length
 struct PSButton_Previews: PreviewProvider {

@@ -1,10 +1,3 @@
-//
-//  CollectionViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -18,7 +11,7 @@ public enum CollectionViewAttribute: Attribute {
     case dropDelegate(UICollectionViewDropDelegate)
     case dragInteractionEnabled(Bool)
     case reorderingCadence(UICollectionView.ReorderingCadence)
-    case selfSizingInvalidation(UICollectionView.SelfSizingInvalidation)
+//    case selfSizingInvalidation(UICollectionView.SelfSizingInvalidation)
     case backgroundView(UIView)
     case allowsMultipleSelection(Bool)
     case remembersLastFocusedIndexPath(Bool)
@@ -56,8 +49,8 @@ public enum CollectionViewAttribute: Attribute {
             return CollectionViewDragInteractionEnabled(value: bool)
         case .reorderingCadence(let reorderingCadence):
             return CollectionViewReorderingCadence(value: reorderingCadence)
-        case .selfSizingInvalidation(let selfSizingInvalidation):
-            return CollectionViewSelfSizingInvalidation(value: selfSizingInvalidation)
+//        case .selfSizingInvalidation(let selfSizingInvalidation):
+//            return CollectionViewSelfSizingInvalidation(value: selfSizingInvalidation)
         case .backgroundView(let uIView):
             return CollectionViewBackgroundView(value: uIView)
         case .allowsMultipleSelection(let bool):
@@ -65,17 +58,41 @@ public enum CollectionViewAttribute: Attribute {
         case .remembersLastFocusedIndexPath(let bool):
             return CollectionViewRemembersLastFocusedIndexPath(value: bool)
         case .selectionFollowsFocus(let bool):
-            return CollectionViewSelectionFollowsFocus(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewSelectionFollowsFocus(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .allowsFocus(let bool):
-            return CollectionViewAllowsFocus(value: bool)
+            if #available(iOS 15.0, *) {
+                return CollectionViewAllowsFocus(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .allowsFocusDuringEditing(let bool):
-            return CollectionViewAllowsFocusDuringEditing(value: bool)
+            if #available(iOS 15.0, *) {
+                return CollectionViewAllowsFocusDuringEditing(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .isEditing(let bool):
-            return CollectionViewIsEditing(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewIsEditing(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .allowsSelectionDuringEditing(let bool):
-            return CollectionViewAllowsSelectionDuringEditing(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewAllowsSelectionDuringEditing(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .allowsMultipleSelectionDuringEditing(let bool):
-            return CollectionViewAllowsMultipleSelectionDuringEditing(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewAllowsMultipleSelectionDuringEditing(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case let .collectionViewRegisterNibKind(value):
             return CollectionViewRegisterNibKind(value: value)
         case let .collectionViewRegisterViewClassElementKind(value):
@@ -202,6 +219,7 @@ public struct CollectionViewReorderingCadence: Attribute {
         collectionView.reorderingCadence = value
     }
 }
+@available(iOS 16.0, *)
 public struct CollectionViewSelfSizingInvalidation: Attribute {
     public let value: UICollectionView.SelfSizingInvalidation
 
@@ -252,6 +270,7 @@ public struct CollectionViewRemembersLastFocusedIndexPath: Attribute {
         collectionView.remembersLastFocusedIndexPath = value
     }
 }
+@available(iOS 14.0, *)
 public struct CollectionViewSelectionFollowsFocus: Attribute {
     public let value: Bool
 
@@ -264,6 +283,7 @@ public struct CollectionViewSelectionFollowsFocus: Attribute {
         collectionView.selectionFollowsFocus = value
     }
 }
+@available(iOS 15.0, *)
 public struct CollectionViewAllowsFocus: Attribute {
     public let value: Bool
 
@@ -276,6 +296,7 @@ public struct CollectionViewAllowsFocus: Attribute {
         collectionView.allowsFocus = value
     }
 }
+@available(iOS 15.0, *)
 public struct CollectionViewAllowsFocusDuringEditing: Attribute {
     public let value: Bool
 
@@ -288,6 +309,7 @@ public struct CollectionViewAllowsFocusDuringEditing: Attribute {
         collectionView.allowsFocusDuringEditing = value
     }
 }
+@available(iOS 14.0, *)
 public struct CollectionViewIsEditing: Attribute {
     public let value: Bool
 
@@ -301,6 +323,7 @@ public struct CollectionViewIsEditing: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct CollectionViewAllowsSelectionDuringEditing: Attribute {
     public let value: Bool
@@ -315,6 +338,7 @@ public struct CollectionViewAllowsSelectionDuringEditing: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct CollectionViewAllowsMultipleSelectionDuringEditing: Attribute {
     public let value: Bool

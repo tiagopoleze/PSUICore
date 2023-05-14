@@ -1,21 +1,8 @@
-//
-//  View+ErrorAlert.swift
-//  
-//
-//  Created by Tiago Ferreira on 27/04/2023.
-//
-
 import SwiftUI
 import PSCore
 
+@available(iOS 15.0, macOS 12.0, *)
 public extension View {
-
-    /// A helper modifier to show an error view
-    /// - Parameters:
-    ///   - error: The error to show
-    ///   - buttonTitle: The button title
-    ///   - buttonAction: the action when the button is pressed
-    /// - Returns: The new View
     func errorAlert(
         error: Binding<Error?>,
         buttonTitle: String = "OK",
@@ -33,6 +20,7 @@ public extension View {
     }
 }
 
+@available(iOS 14.0, macOS 12, *)
 private struct LocalizedAlertError: LocalizedError {
     let underlyingError: LocalizedError
     var errorDescription: String? {

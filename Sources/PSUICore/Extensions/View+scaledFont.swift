@@ -1,13 +1,7 @@
-//
-//  View+scaledFont.swift
-//  
-//
-//  Created by Tiago Ferreira on 28/04/2023.
-//
-
 #if os(iOS)
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, *)
 struct ScaledFont: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
     var name: String
@@ -19,12 +13,8 @@ struct ScaledFont: ViewModifier {
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 public extension View {
-    /// A modifier to add some scalable fonts
-    /// - Parameters:
-    ///   - font: The custom font
-    ///   - size: the size you want
-    /// - Returns: The new view
     func custom(font: String, size: CGFloat) -> some View {
         return scaledFont(name: font, size: size)
     }

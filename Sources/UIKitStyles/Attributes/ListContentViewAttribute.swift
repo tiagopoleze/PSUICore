@@ -1,10 +1,3 @@
-//
-//  ListContentViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 

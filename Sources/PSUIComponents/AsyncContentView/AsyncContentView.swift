@@ -1,13 +1,6 @@
-//
-//  AsyncContentView.swift
-//  
-//
-//  Created by Tiago Ferreira on 28/04/2023.
-//
-
 import SwiftUI
 
-/// The View that wrap the state
+@available(iOS 15.0, macOS 12.0, *)
 public struct AsyncContentView<Source: LoadableObject, Content: View>: View {
     @ObservedObject var source: Source
     var content: (Source.Output) -> Content
@@ -68,6 +61,7 @@ private enum AsyncArticleError: LocalizedError {
     }
 }
 
+@available(iOS 16.0, macOS 13.0, *)
 private struct AsyncArticleView: View {
     @ObservedObject var viewModel: ViewModel
 
@@ -93,6 +87,7 @@ private struct AsyncArticleView: View {
     }
 }
 
+@available(iOS 16.0, macOS 13.0, *)
 private extension AsyncArticleView {
     class ViewModel: LoadableObject {
         @Published private(set) var state = LoadingState<Article>.idle
@@ -137,6 +132,7 @@ private extension AsyncArticleView {
     }
 }
 
+@available(iOS 16.0, macOS 13.0, *)
 struct AsyncArticleView_Previews: PreviewProvider {
     static var previews: some View {
         AsyncArticleView(viewModel: .mock)

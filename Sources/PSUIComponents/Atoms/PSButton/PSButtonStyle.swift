@@ -1,13 +1,7 @@
-//
-//  PSButtonStyle.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 import SwiftUI
 import PSUICore
 
+@available(iOS 15.0, macOS 12.0, *)
 public enum PSButtonStyle {
     case primary
     case secondary

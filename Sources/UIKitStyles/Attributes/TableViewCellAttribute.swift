@@ -1,10 +1,3 @@
-//
-//  TableViewCellAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -34,7 +27,11 @@ public enum TableViewCellAttribute: Attribute {
     public var value: any Attribute {
         switch self {
         case .automaticallyUpdatesBackgroundConfiguration(let bool):
-            return TableViewCellAutomaticallyUpdatesBackgroundConfiguration(value: bool)
+            if #available(iOS 14.0, *) {
+                return TableViewCellAutomaticallyUpdatesBackgroundConfiguration(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .backgroundView(let uIView):
             return TableViewCellBackgroundView(value: uIView)
         case .selectedBackgroundView(let uIView):
@@ -81,6 +78,7 @@ public enum TableViewCellAttribute: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct TableViewCellAutomaticallyUpdatesBackgroundConfiguration: Attribute {
     public var value: Bool

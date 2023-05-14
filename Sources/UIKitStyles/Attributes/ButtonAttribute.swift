@@ -1,10 +1,3 @@
-//
-//  ButtonAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 21/04/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -178,6 +171,7 @@ public struct ButtonSetTitle: Attribute {
     }
 }
 
+@available(iOS 13.0, *)
 // swiftlint:disable:next type_name
 public struct ButtonSetPreferredSymbolConfigurationValue {
     public let configuration: UIImage.SymbolConfiguration

@@ -1,12 +1,6 @@
-//
-//  Shimmer.swift
-//  
-//
-//  Created by Tiago Ferreira on 08/05/2023.
-//
-
 import SwiftUI
 
+@available(iOS 15.0, macOS 12.0, *)
 public struct ShimmerConfig {
     public var tint: Color
     public var highlight: Color
@@ -32,6 +26,7 @@ public struct ShimmerConfig {
     }
 }
 
+@available(iOS 15.0, macOS 12.0, *)
 public extension View {
     @ViewBuilder
     func shimmer(_ config: ShimmerConfig) -> some View {
@@ -39,6 +34,7 @@ public extension View {
     }
 }
 
+@available(iOS 15.0, macOS 12.0, *)
 private struct ShimmerEffectHelper: ViewModifier {
     var config: ShimmerConfig
     var rotationDegree: Double = -70
@@ -88,6 +84,7 @@ private struct ShimmerEffectHelper: ViewModifier {
 }
 
 #if DEBUG
+@available(iOS 15.0, macOS 12.0, *)
 struct ShimmerPreview: PreviewProvider {
     static var previews: some View {
         Text("Shimmer")

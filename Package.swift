@@ -5,36 +5,16 @@ import PackageDescription
 
 let package = Package(
     name: "PSUICore",
-    platforms: [.iOS(.v16), .macOS(.v13), .tvOS(.v13), .watchOS(.v7)],
     products: [
-        .library(
-            name: "PSUICore",
-            targets: ["PSUICore", "UIKitStyles", "PSUIComponents"]
-        ),
+        .library(name: "PSUICore", targets: ["PSUICore", "UIKitStyles", "PSUIComponents"])
     ],
     dependencies: [
-        .package(url: "https://tiagopoleze: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@github.com/tiagopoleze/SwiftlintPlugin", branch: "main"),
-        .package(url: "https://tiagopoleze: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@github.com/tiagopoleze/PSCore", branch: "main")
+        .package(url: "https://github.com/tiagopoleze/PSCore", branch: "main")
     ],
     targets: [
-        .target(
-            name: "PSUICore",
-            dependencies: ["PSCore"],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLintPlugin")]
-        ),
-        .target(
-            name: "PSUIComponents",
-            dependencies: ["PSUICore"],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLintPlugin")]
-        ),
-        .target(
-            name: "UIKitStyles",
-            dependencies: ["PSUICore"],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLintPlugin")]
-        ),
-        .testTarget(
-            name: "PSUICoreTests",
-            dependencies: ["PSUICore"]
-        )
+        .target(name: "PSUICore", dependencies: ["PSCore"]),
+        .target(name: "PSUIComponents", dependencies: ["PSUICore"]),
+        .target(name: "UIKitStyles", dependencies: ["PSUICore"]),
+        .testTarget(name: "PSUICoreTests", dependencies: ["PSUICore"])
     ]
 )

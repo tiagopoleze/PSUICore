@@ -1,10 +1,3 @@
-//
-//  CollectionViewCellAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -21,13 +14,21 @@ public enum CollectionViewCellAttribute: Attribute {
     public var value: any Attribute {
         switch self {
         case .automaticallyUpdatesContentConfiguration(let bool):
-            return CollectionViewCellAutomaticallyUpdatesContentConfiguration(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewCellAutomaticallyUpdatesContentConfiguration(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .isSelected(let bool):
             return CollectionViewCellIsSelected(value: bool)
         case .isHighlighted(let bool):
             return CollectionViewCellIsHighlighted(value: bool)
         case .automaticallyUpdatesBackgroundConfiguration(let bool):
-            return CollectionViewCellAutomaticallyUpdatesBackgroundConfiguration(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewCellAutomaticallyUpdatesBackgroundConfiguration(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .backgroundView(let uIView):
             return CollectionViewCellBackgroundView(value: uIView)
         case .selectedBackgroundView(let uIView):
@@ -42,6 +43,7 @@ public enum CollectionViewCellAttribute: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct CollectionViewCellAutomaticallyUpdatesContentConfiguration: Attribute {
     public let value: Bool
@@ -80,6 +82,7 @@ public struct CollectionViewCellIsHighlighted: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct CollectionViewCellAutomaticallyUpdatesBackgroundConfiguration: Attribute {
     public let value: Bool

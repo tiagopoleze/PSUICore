@@ -1,10 +1,3 @@
-//
-//  ControlAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 08/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -37,11 +30,23 @@ public enum ControlAttribute: Attribute {
         case .removeTarget(let controlRemoveTargetValue):
             return ControlRemoveTarget(value: controlRemoveTargetValue)
         case .isContextMenuInteractionEnabled(let bool):
-            return ControlIsContextMenuInteractionEnabled(value: bool)
+            if #available(iOS 14.0, *) {
+                return ControlIsContextMenuInteractionEnabled(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .showsMenuAsPrimaryAction(let bool):
-            return ControlShowsMenuAsPrimaryAction(value: bool)
+            if #available(iOS 14.0, *) {
+                return ControlShowsMenuAsPrimaryAction(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .toolTip(let string):
-            return ControlToolTip(value: string)
+            if #available(iOS 15.0, *) {
+                return ControlToolTip(value: string)
+            } else {
+                return EmptyAttribute()
+            }
         }
     }
 
@@ -172,6 +177,7 @@ public struct ControlRemoveTarget: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 public struct ControlIsContextMenuInteractionEnabled: Attribute {
     public let value: Bool
 
@@ -185,6 +191,7 @@ public struct ControlIsContextMenuInteractionEnabled: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 public struct ControlShowsMenuAsPrimaryAction: Attribute {
     public let value: Bool
 
@@ -198,6 +205,7 @@ public struct ControlShowsMenuAsPrimaryAction: Attribute {
     }
 }
 
+@available(iOS 15.0, *)
 public struct ControlToolTip: Attribute {
     public let value: String
 

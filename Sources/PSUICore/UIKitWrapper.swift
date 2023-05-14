@@ -1,13 +1,7 @@
-//
-//  UIKitWrapper.swift
-//  
-//
-//  Created by Tiago Ferreira on 27/04/2023.
-//
-
 #if os(iOS)
 import SwiftUI
 
+@available(iOS 13.0, *)
 public struct UIViewWrapper<Content: UIView>: UIViewRepresentable {
     private let initialize: (Context) -> Content
     private let updatable: ((Content, Context) -> Void)?
@@ -26,6 +20,7 @@ public struct UIViewWrapper<Content: UIView>: UIViewRepresentable {
     }
 }
 
+@available(iOS 13.0, *)
 public struct UIViewControllerWrapper<Content: UIViewController>: UIViewControllerRepresentable {
     private let initialize: (Context) -> Content
     private let updatable: ((Content, Context) -> Void)?

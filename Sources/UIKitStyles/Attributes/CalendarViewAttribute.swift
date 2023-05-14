@@ -1,13 +1,7 @@
-//
-//  CalendarViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 10/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
+@available(iOS 16.0, *)
 public enum CalendarViewAttribute: Attribute {
     case delegate(UICalendarViewDelegate)
     case selectionBehavior(UICalendarSelection)
@@ -56,6 +50,7 @@ public enum CalendarViewAttribute: Attribute {
     }
 }
 
+@available(iOS 16.0, *)
 public struct CalendarViewDelegate: Attribute {
     public let value: UICalendarViewDelegate
 
@@ -69,6 +64,7 @@ public struct CalendarViewDelegate: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewSelectionBehavior: Attribute {
     public let value: UICalendarSelection
 
@@ -82,6 +78,7 @@ public struct CalendarViewSelectionBehavior: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewLocale: Attribute {
     public let value: Locale
 
@@ -95,6 +92,7 @@ public struct CalendarViewLocale: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewCalendar: Attribute {
     public let value: Calendar
 
@@ -108,6 +106,7 @@ public struct CalendarViewCalendar: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewTimeZone: Attribute {
     public let value: TimeZone
 
@@ -121,6 +120,7 @@ public struct CalendarViewTimeZone: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewFontDesign: Attribute {
     public let value: UIFontDescriptor.SystemDesign
 
@@ -134,6 +134,7 @@ public struct CalendarViewFontDesign: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewAvailableDateRange: Attribute {
     public let value: DateInterval
 
@@ -147,6 +148,7 @@ public struct CalendarViewAvailableDateRange: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarViewVisibleDateComponents: Attribute {
     public let value: DateComponents
 
@@ -160,6 +162,7 @@ public struct CalendarViewVisibleDateComponents: Attribute {
     }
 
 }
+@available(iOS 16.0, *)
 public struct CalendarVieWwantsDateDecorations: Attribute {
     public let value: Bool
 
@@ -173,6 +176,7 @@ public struct CalendarVieWwantsDateDecorations: Attribute {
     }
 }
 
+@available(iOS 16.0, *)
 public struct CalendarViewSetVisibleDateComponents: Attribute {
     public var value: CalendarViewSetVisibleDateComponentsValue
 
@@ -185,6 +189,7 @@ public struct CalendarViewSetVisibleDateComponents: Attribute {
         calendarView.setVisibleDateComponents(value.dateComponents, animated: value.animated)
     }
 }
+@available(iOS 16.0, *)
 public struct CalendarViewReloadDecorations: Attribute {
     public var value: CalendarViewReloadDecorationsValue
 

@@ -1,12 +1,6 @@
-//
-//  BorderViewModifier.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, *)
 private struct RoundedBorderViewModifier: ViewModifier {
     let cornerRadius: CGFloat
     let color: Color
@@ -27,12 +21,14 @@ private struct RoundedBorderViewModifier: ViewModifier {
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 public extension View {
     func roundedBorder(cornerRadius: CGFloat, color: Color, lineWidth: CGFloat) -> some View {
         modifier(RoundedBorderViewModifier(cornerRadius: cornerRadius, color: color, lineWidth: lineWidth))
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 private struct RectangleBorderViewModifier: ViewModifier {
     let color: Color
     let lineWidth: CGFloat
@@ -51,12 +47,14 @@ private struct RectangleBorderViewModifier: ViewModifier {
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 public extension View {
     func rectangleBorder(cornerRadius: CGFloat, color: Color, lineWidth: CGFloat) -> some View {
         modifier(RectangleBorderViewModifier(color: color, lineWidth: lineWidth))
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 private struct CircleBorderViewModifier: ViewModifier {
     let color: Color
     let lineWidth: CGFloat
@@ -75,8 +73,9 @@ private struct CircleBorderViewModifier: ViewModifier {
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 public extension View {
-    func circleBorder(cornerRadius: CGFloat, color: Color, lineWidth: CGFloat) -> some View {
+    func circleBorder(color: Color, lineWidth: CGFloat) -> some View {
         modifier(CircleBorderViewModifier(color: color, lineWidth: lineWidth))
     }
 }

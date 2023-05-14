@@ -1,11 +1,4 @@
-//
-//  TableViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 21/04/2023.
-//
 // swiftlint:disable file_length
-
 #if os(iOS)
 import UIKit
 

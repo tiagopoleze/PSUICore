@@ -1,10 +1,3 @@
-//
-//  TableViewHeaderFooterViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -18,9 +11,17 @@ public enum TableViewHeaderFooterViewAttribute: Attribute {
     public var value: any Attribute {
         switch self {
         case .automaticallyUpdatesContentConfiguration(let bool):
-            return TableViewHeaderFooterViewAutomaticallyUpdatesContentConfiguration(value: bool)
+            if #available(iOS 14.0, *) {
+                return TableViewHeaderFooterViewAutomaticallyUpdatesContentConfiguration(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .automaticallyUpdatesBackgroundConfiguration(let bool):
-            return TableViewHeaderFooterViewAutomaticallyUpdatesBackgroundConfiguration(value: bool)
+            if #available(iOS 14.0, *) {
+                return TableViewHeaderFooterViewAutomaticallyUpdatesBackgroundConfiguration(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .backgroundView(let uIView):
             return TableViewHeaderFooterViewBackgroundView(value: uIView)
         case .view(let viewAttribute):
@@ -33,6 +34,7 @@ public enum TableViewHeaderFooterViewAttribute: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct TableViewHeaderFooterViewAutomaticallyUpdatesContentConfiguration: Attribute {
     public let value: Bool
@@ -47,6 +49,7 @@ public struct TableViewHeaderFooterViewAutomaticallyUpdatesContentConfiguration:
     }
 }
 
+@available(iOS 14.0, *)
 // swiftlint:disable:next type_name
 public struct TableViewHeaderFooterViewAutomaticallyUpdatesBackgroundConfiguration: Attribute {
     public let value: Bool
