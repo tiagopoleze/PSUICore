@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 @available(iOS 13.0, *)
@@ -63,7 +64,6 @@ struct GroupPagingScroller<Content: View, T: Identifiable>: View {
     }
 }
 
-#if DEBUG
 private struct Person: Identifiable {
     var id: String { name }
     let name: String
