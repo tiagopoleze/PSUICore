@@ -1,17 +1,10 @@
-//
-//  ImageViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 21/04/2023.
-//
-
 #if os(iOS)
 import UIKit
 
 public enum ImageViewAttribute: Attribute {
     case image(UIImage)
     case highlightedImage(UIImage)
-    case preferredSymbolConfiguration(UIImage.SymbolConfiguration)
+//    case preferredSymbolConfiguration(UIImage.SymbolConfiguration)
     case isUserInteractionEnabled(Bool)
     case isHighlighted(Bool)
     case animationImages([UIImage])
@@ -28,8 +21,8 @@ public enum ImageViewAttribute: Attribute {
             return ImageViewImage(value: value)
         case .highlightedImage(let value):
             return ImageViewHighlightedImage(value: value)
-        case .preferredSymbolConfiguration(let value):
-            return ImageViewPreferredSymbolConfiguration(value: value)
+//        case .preferredSymbolConfiguration(let value):
+//            return ImageViewPreferredSymbolConfiguration(value: value)
         case .isUserInteractionEnabled(let value):
             return ImageViewIsUserInteractionEnabled(value: value)
         case .isHighlighted(let value):
@@ -83,6 +76,7 @@ public struct ImageViewTintColor: Attribute {
     }
 }
 
+@available(iOS 13.0, *)
 public struct ImageViewPreferredSymbolConfiguration: Attribute {
     public var value: UIImage.SymbolConfiguration
 

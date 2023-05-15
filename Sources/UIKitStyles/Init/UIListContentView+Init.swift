@@ -1,13 +1,7 @@
-//
-//  UIListContentView+Init.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
+@available(iOS 14.0, *)
 public extension UIListContentView {
     convenience init(
         configuration: UIListContentConfiguration,

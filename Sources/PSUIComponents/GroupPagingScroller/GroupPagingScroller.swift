@@ -1,12 +1,7 @@
-//
-//  GroupPagingScroller.swift
-//  
-//
-//  Created by Tiago Ferreira on 28/04/2023.
-//
-
+#if os(iOS)
 import SwiftUI
 
+@available(iOS 13.0, *)
 struct GroupPagingScroller<Content: View, T: Identifiable>: View {
     var content: (T) -> Content
     var list: [T]
@@ -69,12 +64,12 @@ struct GroupPagingScroller<Content: View, T: Identifiable>: View {
     }
 }
 
-#if DEBUG
 private struct Person: Identifiable {
     var id: String { name }
     let name: String
 }
 
+@available(iOS 15.0, macOS 12.0, *)
 struct GroupPagingScrollerPreview: PreviewProvider {
     static var previews: some View {
         GroupPagingScroller(

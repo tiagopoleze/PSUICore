@@ -1,10 +1,3 @@
-//
-//  CollectionViewListCellAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -18,11 +11,23 @@ public enum CollectionViewListCellAttribute: Attribute {
     public var value: any Attribute {
         switch self {
         case .indentationLevel(let int):
-            return CollectionViewListIndentationLevel(value: int)
+            if #available(iOS 14.0, *) {
+                return CollectionViewListIndentationLevel(value: int)
+            } else {
+                return EmptyAttribute()
+            }
         case .indentationWidth(let cGFloat):
-            return CollectionViewListIndentationWidth(value: cGFloat)
+            if #available(iOS 14.0, *) {
+                return CollectionViewListIndentationWidth(value: cGFloat)
+            } else {
+                return EmptyAttribute()
+            }
         case .indentsAccessories(let bool):
-            return CollectionViewListIndentsAccessories(value: bool)
+            if #available(iOS 14.0, *) {
+                return CollectionViewListIndentsAccessories(value: bool)
+            } else {
+                return EmptyAttribute()
+            }
         case .cell(let collectionViewCellAttribute):
             return collectionViewCellAttribute.value
         case .view(let viewAttribute):
@@ -35,6 +40,7 @@ public enum CollectionViewListCellAttribute: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 public struct CollectionViewListIndentationLevel: Attribute {
     public var value: Int
 
@@ -48,6 +54,7 @@ public struct CollectionViewListIndentationLevel: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 public struct CollectionViewListIndentationWidth: Attribute {
     public var value: CGFloat
 
@@ -61,6 +68,7 @@ public struct CollectionViewListIndentationWidth: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 public struct CollectionViewListIndentsAccessories: Attribute {
     public var value: Bool
 

@@ -1,10 +1,3 @@
-//
-//  SegmentedControlAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -15,7 +8,7 @@ public enum SegmentedControlAttribute: Attribute {
     case selectedSegmentTintColor(UIColor)
     case setDividerImage(SegmentedControlSetDividerImageValue)
     case setContentPositionAdjustment(SegmentedControlSetContentPositionAdjustmentValue)
-    case insertSegmentAction(SegmentedControlInsertSegmentActionValue)
+//    case insertSegmentAction(SegmentedControlInsertSegmentActionValue)
     case insertSegmentTitle(SegmentedControlInsertSegmentTitleValue)
     case insertSegmentImage(SegmentedControlInsertSegmentImageValue)
     case setBackgroundImage(SegmentedControlSetBackgroundImageValue)
@@ -31,13 +24,17 @@ public enum SegmentedControlAttribute: Attribute {
         case .selectedSegmentIndex(let int):
             return SegmentedControlSelectedSegmentIndex(value: int)
         case .selectedSegmentTintColor(let uIColor):
-            return SegmentedControlSelectedSegmentTintColor(value: uIColor)
+            if #available(iOS 13.0, *) {
+                return SegmentedControlSelectedSegmentTintColor(value: uIColor)
+            } else {
+                return EmptyAttribute()
+            }
         case .setDividerImage(let segmentedControlSetDividerImageValue):
             return SegmentedControlSetDividerImage(value: segmentedControlSetDividerImageValue)
         case .setContentPositionAdjustment(let value):
             return SegmentedControlSetContentPositionAdjustment(value: value)
-        case .insertSegmentAction(let segmentedControlInsertSegmentActionValue):
-            return SegmentedControlInsertSegmentAction(value: segmentedControlInsertSegmentActionValue)
+//        case .insertSegmentAction(let segmentedControlInsertSegmentActionValue):
+//            return SegmentedControlInsertSegmentAction(value: segmentedControlInsertSegmentActionValue)
         case .insertSegmentTitle(let segmentedControlInsertSegmentTitleValue):
             return SegmentedControlInsertSegmentTitle(value: segmentedControlInsertSegmentTitleValue)
         case .insertSegmentImage(let segmentedControlInsertSegmentImageValue):
@@ -94,6 +91,7 @@ public struct SegmentedControlSelectedSegmentIndex: Attribute {
         segmentedControl.selectedSegmentIndex = value
     }
 }
+@available(iOS 13.0, *)
 public struct SegmentedControlSelectedSegmentTintColor: Attribute {
     public let value: UIColor
 
@@ -107,6 +105,7 @@ public struct SegmentedControlSelectedSegmentTintColor: Attribute {
     }
 }
 
+@available(iOS 14.0, *)
 public struct SegmentedControlInsertSegmentAction: Attribute {
     public var value: SegmentedControlInsertSegmentActionValue
 
@@ -120,6 +119,7 @@ public struct SegmentedControlInsertSegmentAction: Attribute {
     }
 }
 
+@available(iOS 13.0, *)
 public struct SegmentedControlInsertSegmentActionValue {
     public let action: UIAction
     public let segment: Int

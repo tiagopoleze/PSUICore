@@ -1,13 +1,7 @@
-//
-//  View+deviceCornerRadius.swift
-//  
-//
-//  Created by Tiago Ferreira on 27/04/2023.
-//
-
 #if os(iOS)
 import SwiftUI
 
+@available(iOS 13.0, *)
 public extension View {
     var deviceCornerRadius: CGFloat {
         let key = "_displayCornerRadius"

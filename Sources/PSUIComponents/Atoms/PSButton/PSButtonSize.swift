@@ -1,12 +1,6 @@
-//
-//  PSButtonSize.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 import SwiftUI
 
+@available(iOS 15.0, macOS 12.0, *)
 public enum PSButtonSize {
     case small
     case medium

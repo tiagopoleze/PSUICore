@@ -1,10 +1,3 @@
-//
-//  UICollectionView+Init.swift
-//  
-//
-//  Created by Tiago Ferreira on 23/04/2023.
-//
-
 #if os(iOS)
 import UIKit
 

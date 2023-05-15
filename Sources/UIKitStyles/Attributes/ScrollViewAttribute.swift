@@ -1,10 +1,3 @@
-//
-//  ScrollViewAttribute.swift
-//  
-//
-//  Created by Tiago Ferreira on 21/04/2023.
-//
-
 #if os(iOS)
 import UIKit
 
@@ -93,13 +86,25 @@ public enum ScrollViewAttribute: Attribute {
         case .zoomScale(let value):
             return ScrollViewZoomScale(value: value)
         case .horizontalScrollIndicatorInsets(let value):
-            return ScrollViewHorizontalScrollIndicatorInsets(value: value)
+            if #available(iOS 11.1, *) {
+                return ScrollViewHorizontalScrollIndicatorInsets(value: value)
+            } else {
+                return EmptyAttribute()
+            }
         case .automaticallyAdjustsScrollIndicatorInsets(let value):
-            return ScrollViewAutomaticallyAdjustsScrollIndicatorInsets(value: value)
+            if #available(iOS 13.0, *) {
+                return ScrollViewAutomaticallyAdjustsScrollIndicatorInsets(value: value)
+            } else {
+                return EmptyAttribute()
+            }
         case .view(let value):
             return value.value
         case .verticalScrollIndicatorInsets(let value):
-            return ScrollViewVerticalScrollIndicatorInsets(value: value)
+            if #available(iOS 11.1, *) {
+                return ScrollViewVerticalScrollIndicatorInsets(value: value)
+            } else {
+                return EmptyAttribute()
+            }
         }
     }
 
@@ -304,6 +309,7 @@ public struct ScrollViewIndexDisplayMode: Attribute {
     }
 }
 
+@available(iOS 11.1, *)
 // swiftlint:disable:next type_name
 public struct ScrollViewHorizontalScrollIndicatorInsets: Attribute {
     public var value: UIEdgeInsets

@@ -1,22 +1,16 @@
-//
-//  UISegmentedControl+Init.swift
-//  
-//
-//  Created by Tiago Ferreira on 11/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 
+@available(iOS 14.0, *)
 public extension UISegmentedControl {
     convenience init(
         frame: CGRect,
-        actions: [UIAction],
+        uiActions: [UIAction],
         style: (any UIKitStyles.Style)? = nil,
         attributes: [any Attribute] = [],
         additionalChanges: ((UISegmentedControl) -> Void)? = nil
     ) {
-        self.init(frame: frame, actions: actions)
+        self.init(frame: frame, actions: uiActions)
         style?.modify(view: self)
         for attribute in attributes {
             attribute.modify(view: self)

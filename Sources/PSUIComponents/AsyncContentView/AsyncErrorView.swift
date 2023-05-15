@@ -1,14 +1,7 @@
-//
-//  AsyncErrorView.swift
-//  
-//
-//  Created by Tiago Ferreira on 28/04/2023.
-//
-
 import SwiftUI
 import PSUICore
 
-/// An generic error view
+@available(iOS 15.0, macOS 12.0, *)
 struct AsyncErrorView: View {
     @State var error: Error?
     var retryHandler: (() -> Void)?

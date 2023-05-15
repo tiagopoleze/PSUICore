@@ -1,10 +1,3 @@
-//
-//  OrientationHelper.swift
-//  
-//
-//  Created by Tiago Ferreira on 27/04/2023.
-//
-
 #if os(iOS)
 import UIKit
 

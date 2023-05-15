@@ -1,12 +1,6 @@
-//
-//  MediaTypeAccessRequester.swift
-//  
-//
-//  Created by Tiago Ferreira on 08/05/2023.
-//
-
 import AVFoundation
 
+@available(macOS 10.14, *)
 final public class MediaTypeAccessRequester {
     private let finishAction: () -> Void
     private let errorAction: () -> Void
@@ -76,6 +70,7 @@ public extension MediaTypeAccessRequester {
 #if DEBUG
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, *)
 struct MediaTypeAccessRequester_Preview: PreviewProvider {
     static var previews: some View {
         Button("Request Media type access") {

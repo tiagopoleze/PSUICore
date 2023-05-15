@@ -1,10 +1,3 @@
-//
-//  UITableView+Init.swift
-//  
-//
-//  Created by Tiago Ferreira on 20/04/2023.
-//
-
 #if os(iOS)
 import UIKit
 

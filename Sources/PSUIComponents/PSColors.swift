@@ -1,12 +1,6 @@
-//
-//  File.swift
-//  
-//
-//  Created by Tiago Ferreira on 14/05/2023.
-//
-
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, *)
 public extension Color {
     static func primaryPS(_ colorScheme: ColorScheme) -> Color {
         colorScheme == .light
