@@ -33,7 +33,7 @@ public extension UIColor {
         }
     }
 
-    convenience init(_ hexValue: String) {
+    convenience init(hexValue: String) {
         let hex = hexValue.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var uInt64 = UInt64()
         guard Scanner(string: hex).scanHexInt64(&uInt64) else {
@@ -93,7 +93,7 @@ public extension NSColor {
         }
     }
 
-    convenience init(_ hexValue: String) {
+    convenience init(hexValue: String) {
         let hex = hexValue.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var uInt64 = UInt64()
         guard Scanner(string: hex).scanHexInt64(&uInt64) else {
@@ -137,11 +137,11 @@ public extension Color {
     }
 
     @available(iOS 15.0, macOS 12.0, *)
-    init(_ hexValue: String) {
+    init(hexValue: String) {
 #if canImport(UIKit)
-        self = Color(uiColor: UIColor(hexValue))
+        self = Color(uiColor: UIColor(hexValue: hexValue))
 #elseif canImport(AppKit)
-        self = Color(nsColor: NSColor(hexValue))
+        self = Color(nsColor: NSColor(hexValue: hexValue))
 #endif
     }
 }
