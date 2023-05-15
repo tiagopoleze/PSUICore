@@ -12,7 +12,7 @@ public struct PSButton: View {
     private let buttonSize: PSButtonSize
     @Binding private var loading: Bool
     @Binding private var disable: Bool
-    private let action: (() async -> Void)?
+    private let action: (@Sendable () async -> Void)?
 
     public init(
         title: String,
@@ -22,7 +22,7 @@ public struct PSButton: View {
         cornerRadius: CGFloat? = nil,
         loading: Binding<Bool> = .constant(false),
         disable: Binding<Bool> = .constant(false),
-        action: (() async -> Void)? = nil
+        action: (@Sendable () async -> Void)? = nil
     ) {
         self.action = action
         self.title = title
