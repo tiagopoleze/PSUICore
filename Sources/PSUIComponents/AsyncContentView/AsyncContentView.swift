@@ -140,7 +140,9 @@ private extension AsyncArticleView {
     }
 }
 
-#Preview(body: {
-    AsyncArticleView(viewModel: .mock)
-})
+struct AsyncArticleViewPreview: PreviewProvider {
+    static var previews: some View {
+        AsyncArticleView(viewModel: .mock)
+    }
+}
 #endif
