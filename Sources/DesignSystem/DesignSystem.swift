@@ -10,8 +10,10 @@ struct MyView: View {
     }
 }
 
-#Preview {
-    MyView(designSystem: .init(fileName: "Token"))
+struct DesignSystemPreview: PreviewProvider {
+    static var previews: some View {
+        MyView(designSystem: .init(fileName: "Token"))
+    }
 }
 
 public final class DesignSystem: ObservableObject {
