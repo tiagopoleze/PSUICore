@@ -12,7 +12,7 @@ struct MyView: View {
 
 struct DesignSystemPreview: PreviewProvider {
     static var previews: some View {
-        MyView(designSystem: .init(fileName: "Token"))
+        MyView(designSystem: try! DesignSystem(fileName: "Token"))
     }
 }
 
@@ -29,10 +29,12 @@ public final class DesignSystem: ObservableObject {
         self.font = font
     }
     
-    init(fileName: String) {
+    init(fileName: String) throws {
         let url = Bundle.module.url(forResource: fileName, withExtension: "json")!
         let data = try! Data(contentsOf: url)
-        let decodedDesignSystem = try! JSONDecoder().decode(DesignSystem.self, from: data)
+        guard let decodedDesignSystem = try? JSONDecoder().decode(DesignSystem.self, from: data) else {
+            throw DesignSystemError.decodable
+        }
         colors = decodedDesignSystem.colors
         spacer = decodedDesignSystem.spacer
         shadow = decodedDesignSystem.shadow
@@ -45,4 +47,8 @@ public extension DesignSystem {
     static var mock: DesignSystem {
         DesignSystem(colors: DSColor.mock, spacer: DSSpacer.mock, shadow: DSShadow.mock, font: DSFont())
     }
+}
+
+public enum DesignSystemError: Error {
+    case decodable
 }
