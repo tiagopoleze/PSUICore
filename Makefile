@@ -8,7 +8,6 @@ build:
 
 test:
 	@echo "Running tests..."
-
 	swift test
 
 clean:
