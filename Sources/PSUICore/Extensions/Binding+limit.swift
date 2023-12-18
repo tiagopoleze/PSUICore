@@ -1,7 +1,9 @@
 import SwiftUI
 
-@available(iOS 13.0, macOS 10.15, *)
 public extension Binding where Value == String {
+    /// Limits the length of the string to the given length.
+    /// - Parameter length: The maximum length of the string.
+    /// - Returns: The modified binding.
     func limit(_ length: Int) -> Self {
         if wrappedValue.count > length {
             DispatchQueue.main.async {

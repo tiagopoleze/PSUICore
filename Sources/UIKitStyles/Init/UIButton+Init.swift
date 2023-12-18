@@ -1,7 +1,17 @@
 #if os(iOS)
 import UIKit
 
+/// Convenience initializers for UIButton with customizable title, image, style, attributes, and additional changes.
 public extension UIButton {
+    
+    /// Initializes a UIButton with a title, image, style, attributes, and additional changes.
+    ///
+    /// - Parameters:
+    ///   - title: The title of the button.
+    ///   - image: The image of the button.
+    ///   - style: The style to apply to the button.
+    ///   - attributes: The attributes to apply to the button.
+    ///   - additionalChanges: Additional changes to apply to the button.
     convenience init(
         title: String?,
         image: UIImage? = nil,
@@ -19,6 +29,14 @@ public extension UIButton {
         additionalChanges?(self)
     }
 
+    /// Initializes a UIButton with a title, image, style, attributes, and additional changes.
+    ///
+    /// - Parameters:
+    ///   - title: The title of the button.
+    ///   - image: The image of the button.
+    ///   - style: The style to apply to the button.
+    ///   - attributes: The attributes to apply to the button.
+    ///   - additionalChanges: Additional changes to apply to the button.
     convenience init(
         title: String?,
         image: UIImage? = nil,
@@ -35,6 +53,15 @@ public extension UIButton {
         )
     }
 
+    /// Initializes a UIButton with a title, image, style, attributes, configuration, and additional changes.
+    ///
+    /// - Parameters:
+    ///   - title: The title of the button.
+    ///   - image: The image of the button.
+    ///   - style: The style to apply to the button.
+    ///   - attributes: The attributes to apply to the button.
+    ///   - configuration: The configuration to apply to the button.
+    ///   - additionalChanges: Additional changes to apply to the button.
     @available(iOS 15.0, *)
     convenience init(
         title: String? = nil,
@@ -54,6 +81,15 @@ public extension UIButton {
         )
     }
 
+    /// Initializes a UIButton with a title, image, style, attributes, configuration, and additional changes.
+    ///
+    /// - Parameters:
+    ///   - title: The title of the button.
+    ///   - image: The image of the button.
+    ///   - style: The style to apply to the button.
+    ///   - attributes: The attributes to apply to the button.
+    ///   - configuration: The configuration to apply to the button.
+    ///   - additionalChanges: Additional changes to apply to the button.
     @available(iOS 15.0, *)
     convenience init(
         title: String? = nil,

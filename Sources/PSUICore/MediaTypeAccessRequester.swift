@@ -1,15 +1,23 @@
 import AVFoundation
 
-@available(macOS 10.14, *)
+/// A class that requests access to media types.
 final public class MediaTypeAccessRequester {
     private let finishAction: () -> Void
     private let errorAction: () -> Void
 
+    /// Initializes a `MediaTypeAccessRequester` with the specified parameters.
+    /// - Parameters:
+    ///  - finishAction: A closure that is called when the access request is successful.
+    /// - errorAction: A closure that is called when the access request is unsuccessful.
+    /// - Returns: A new instance of `MediaTypeAccessRequester`.
     public init(finishAction: @escaping () -> Void, errorAction: @escaping () -> Void) {
         self.finishAction = finishAction
         self.errorAction = errorAction
     }
 
+    /// Requests access to the specified media types.
+    /// - Parameter mediaTypes: The media types to request access to.
+    /// - Returns: A new instance of `MediaTypeAccessRequester`.
     public func request(types mediaTypes: [AVMediaType]) {
         if mediaTypes.isEmpty {
             DispatchQueue.main.async {
@@ -29,10 +37,14 @@ final public class MediaTypeAccessRequester {
         completion handler: @autoclosure @escaping () -> Void
     ) {
         switch AVCaptureDevice.authorizationStatus(for: mediaType) {
-        case .authorized: handler()
-        case .denied: errorAction()
-        case .notDetermined, .restricted: AVCaptureDevice.requestAccess(for: mediaType) { _ in handler() }
-        @unknown default: errorAction()
+        case .authorized: 
+            handler()
+        case .denied: 
+            errorAction()
+        case .notDetermined, .restricted: 
+            AVCaptureDevice.requestAccess(for: mediaType) { _ in handler() }
+        @unknown default: 
+            errorAction()
         }
     }
 }
@@ -40,7 +52,13 @@ final public class MediaTypeAccessRequester {
 #if os(iOS)
 import UIKit
 
+/// A extension for `MediaTypeAccessRequester` that provides additional functionality.
 public extension MediaTypeAccessRequester {
+    /// Initializes a `MediaTypeAccessRequester` with the specified parameters.
+    /// - Parameters:
+    /// - navigationController: The navigation controller to present the alert controller on.
+    /// - finishAction: A closure that is called when the access request is successful.
+    /// - Returns: A new instance of `MediaTypeAccessRequester`.
     convenience init(navigationController: UINavigationController, finishAction: @escaping () -> Void) {
         self.init(finishAction: finishAction) {
             MediaTypeAccessRequester.defaultErrorAction(navigationController)

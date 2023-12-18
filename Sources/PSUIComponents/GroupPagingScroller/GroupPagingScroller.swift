@@ -1,40 +1,35 @@
 #if os(iOS)
 import SwiftUI
+import DesignSystem
 
-@available(iOS 13.0, *)
-struct GroupPagingScroller<Content: View, T: Identifiable>: View {
+struct GroupPagingScroller<Content: View, T: Identifiable> {
     var content: (T) -> Content
     var list: [T]
-    var spacing: CGFloat
     var trailingSpace: CGFloat
-
+    
     @Binding var index: Int
     @GestureState var offset: CGFloat = 0
     @State private var currentIndex: Int = 0
-
-    init(
-        spacing: CGFloat = 15,
-        trailingSpace: CGFloat = 50,
-        index: Binding<Int>,
-        items: [T],
-        @ViewBuilder content: @escaping (T) -> Content
-    ) {
+    @EnvironmentObject private var designSystem: DesignSystem
+    
+    init(trailingSpace: CGFloat = 50, index: Binding<Int>, items: [T], @ViewBuilder content: @escaping (T) -> Content) {
         self.list = items
-        self.spacing = spacing
         self.trailingSpace = trailingSpace
         self._index = index
         self.content = content
     }
+}
 
+extension GroupPagingScroller: View {
     var body: some View {
         GeometryReader { geo in
-            let width = geo.size.width - (trailingSpace - spacing)
-            let adjustedWidth = (trailingSpace / 2) - spacing
+            let width = geo.size.width - (trailingSpace - designSystem.spacer.lg)
+            let adjustedWidth = (trailingSpace / 2) - designSystem.spacer.lg
 
-            HStack(spacing: spacing) {
+            HStack(spacing: designSystem.spacer.lg) {
                 ForEach(list) { item in content(item).frame(width: abs(geo.size.width - trailingSpace)) }
             }
-            .padding(.horizontal, spacing)
+            .padding(.horizontal, designSystem.spacer.lg)
             .offset(x: (CGFloat(currentIndex) * -width) + (currentIndex != 0 ? adjustedWidth : 0) + offset)
             .gesture(
                 DragGesture()
@@ -69,7 +64,6 @@ private struct Person: Identifiable {
     let name: String
 }
 
-@available(iOS 15.0, macOS 12.0, *)
 struct GroupPagingScrollerPreview: PreviewProvider {
     static var previews: some View {
         GroupPagingScroller(
@@ -82,6 +76,7 @@ struct GroupPagingScrollerPreview: PreviewProvider {
         ) { person in
             PSButton(title: person.name)
         }
+        .environmentObject(DesignSystem.mock)
     }
 }
 #endif

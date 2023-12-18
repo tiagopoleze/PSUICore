@@ -1,7 +1,16 @@
 #if os(iOS)
 import UIKit
 
+/// Convenience initializers for `UIActivityIndicatorView` with customizable styles and attributes.
 public extension UIActivityIndicatorView {
+    
+    /// Initializes a `UIActivityIndicatorView` with the specified activity indicator style, style, attributes, and additional changes.
+    ///
+    /// - Parameters:
+    ///   - activityIndicatorStyle: The style of the activity indicator view.
+    ///   - style: The custom style to apply to the activity indicator view.
+    ///   - attributes: An array of attributes to modify the activity indicator view.
+    ///   - additionalChanges: Additional changes to apply to the activity indicator view.
     convenience init(
         activityIndicatorStyle: UIActivityIndicatorView.Style,
         style: (any UIKitStyles.Style)? = nil,
@@ -16,6 +25,13 @@ public extension UIActivityIndicatorView {
         additionalChanges?(self)
     }
 
+    /// Initializes a `UIActivityIndicatorView` with the specified activity indicator style, style, attributes, and additional changes.
+    ///
+    /// - Parameters:
+    ///   - activityIndicatorStyle: The style of the activity indicator view.
+    ///   - style: The custom style to apply to the activity indicator view.
+    ///   - attributes: An array of attributes to modify the activity indicator view.
+    ///   - additionalChanges: Additional changes to apply to the activity indicator view.
     convenience init(
         activityIndicatorStyle: UIActivityIndicatorView.Style,
         style: (any UIKitStyles.Style)? = nil,

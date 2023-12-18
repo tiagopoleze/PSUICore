@@ -1,13 +1,13 @@
 import SwiftUI
 import PSUICore
 
-@available(iOS 15.0, macOS 12.0, *)
-struct AsyncErrorView: View {
+struct AsyncErrorView {
     @State var error: Error?
     var retryHandler: (() -> Void)?
+}
 
+extension AsyncErrorView: View {
     var body: some View {
-        Text(error?.localizedDescription ?? "")
-            .errorAlert(error: $error, buttonAction: retryHandler)
+        Text(error?.localizedDescription ?? "").errorAlert(error: $error, buttonAction: retryHandler)
     }
 }

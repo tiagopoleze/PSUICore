@@ -1,26 +1,35 @@
 import SwiftUI
+import DesignSystem
 
-@available(iOS 15.0, macOS 12.0, *)
-public struct OTPTextFieldView<ActionButton: View>: View {
+/// A view that displays a text field for OTP input.
+public struct OTPTextFieldView<ActionButton: View> {
+    @EnvironmentObject private var designSystem: DesignSystem
     @Binding private var otpText: String
     @FocusState private var isKeyboardShowing: Bool
     @State private var otpSize: Int
-
+    
     private var size = CGSize(width: 45, height: 45)
     private var cornerRadius: CGFloat = 6
-
+    
     private let button: ActionButton
-
+    
+    /// Initializes an OTPTextField with the specified parameters.
+    /// - Parameters:
+    ///   - otpText: A binding to the OTP text.
+    ///   - otpSize: The size of the OTP.
+    ///   - button: A closure that returns an ActionButton.
     public init(
         otpText: Binding<String>,
         otpSize: Int,
         @ViewBuilder button: () -> ActionButton
     ) {
         self._otpText = otpText
-        self._otpSize = State(wrappedValue:  otpSize)
+        self._otpSize = State(wrappedValue: otpSize)
         self.button = button()
     }
+}
 
+extension OTPTextFieldView: View {
     public var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -45,8 +54,8 @@ public struct OTPTextFieldView<ActionButton: View>: View {
                     .frame(maxWidth: .infinity)
                 }
             }
-            .padding(.bottom, 20)
-            .padding(.top, 10)
+            .padding(.bottom, designSystem.spacer.lg)
+            .padding(.top, designSystem.spacer.md)
             .background {
                 TextField("", text: $otpText.limit(otpSize))
 #if os(iOS)
@@ -86,7 +95,6 @@ public struct OTPTextFieldView<ActionButton: View>: View {
 }
 
 #if DEBUG
-@available(iOS 15.0, macOS 12.0, *)
 struct OTPTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
         OTPTextFieldView(otpText: .constant("123456"), otpSize: 6) {
@@ -94,6 +102,7 @@ struct OTPTextFieldView_Previews: PreviewProvider {
                 print("here")
             }
         }
+        .environmentObject(DesignSystem.mock)
     }
 }
 #endif
