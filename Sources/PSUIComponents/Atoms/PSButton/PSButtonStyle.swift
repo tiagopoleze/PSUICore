@@ -2,12 +2,17 @@ import SwiftUI
 import PSUICore
 import DesignSystem
 
-@available(iOS 15.0, macOS 12.0, *)
+/// PSButtonStyle is a enum that defines the style of the button.
 public enum PSButtonStyle {
+    /// Primary button style.
     case primary
+    /// Secondary button style.
     case secondary
+    /// Tertiary button style.
     case tertiary
+    /// Success button style.
     case success
+    /// Danger button style.
     case danger
 
     func tintColor(

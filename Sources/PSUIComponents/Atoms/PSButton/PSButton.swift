@@ -1,27 +1,7 @@
 import SwiftUI
 import DesignSystem
 
-struct PSButtonViewModifier: ButtonStyle {
-    @EnvironmentObject private var designSystem: DesignSystem
-    let cornerRadius: CGFloat
-    let isDisable: Bool
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .background {
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .foregroundStyle(isDisable
-                                        ? designSystem.colors.primary.default.color().opacity(0.5)
-                                        : designSystem.colors.primary.default.color())
-            }
-    }
-}
-
-// TODO: redo this work
-@available(iOS 15.0, macOS 12.0, *)
-// swiftlint:disable file_length
 public struct PSButton: View {
-    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var designSystem: DesignSystem
 
     private let title: String

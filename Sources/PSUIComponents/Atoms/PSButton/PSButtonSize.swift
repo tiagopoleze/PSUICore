@@ -1,8 +1,10 @@
 import SwiftUI
 
-@available(iOS 15.0, macOS 12.0, *)
+/// PSButtonSize is a enum that defines the size of the button.
 public enum PSButtonSize {
+    /// Small button size.
     case small
+    /// Medium button size.
     case medium
 
     var font: Font {

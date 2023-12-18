@@ -239,17 +239,17 @@ public struct ButtonSetTitle: Attribute {
 }
 
 @available(iOS 13.0, *)
-/// A value type that represents the preferred symbol configuration for a button.
+/// Represents a value that sets the preferred symbol configuration for a button.
 public struct ButtonSetPreferredSymbolConfigurationValue {
-    /// The preferred symbol configuration for the button.
+    /// The symbol configuration to be set.
     public let configuration: UIImage.SymbolConfiguration
-    /// The state of the button.
+    /// The state for which the symbol configuration should be set.
     public let state: UIControl.State
 
     /// Initializes a new instance of `ButtonSetPreferredSymbolConfigurationValue`.
     /// - Parameters:
-    ///   - configuration: The preferred symbol configuration for the button.
-    ///   - state: The state of the button.
+    ///   - configuration: The symbol configuration to be set.
+    ///   - state: The state for which the symbol configuration should be set.
     public init(configuration: UIImage.SymbolConfiguration, state: UIControl.State) {
         self.configuration = configuration
         self.state = state

@@ -172,7 +172,7 @@ public struct SegmentedControlInsertSegmentActionValue {
     public let segment: Int
     /// A flag indicating whether the insertion should be animated.
     public let animated: Bool
-    
+
     /// Initializes a new instance of `SegmentedControlInsertSegmentActionValue`.
     /// - Parameters:
     ///   - action: The action associated with the segment.
