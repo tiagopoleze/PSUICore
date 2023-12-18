@@ -9,11 +9,8 @@ let package = Package(
     products: [
         .library(name: "PSUICore", targets: ["PSUICore", "UIKitStyles", "PSUIComponents", "DesignSystem"])
     ],
-    dependencies: [
-        .package(url: "https://github.com/tiagopoleze/PSCore", branch: "main")
-    ],
     targets: [
-        .target(name: "PSUICore", dependencies: [.product(name: "PSCore", package: "pscore")]),
+        .target(name: "PSUICore"),
         .target(name: "DesignSystem", dependencies: ["PSUICore"], resources: [.copy("Token.json")]),
         .target(name: "PSUIComponents", dependencies: ["PSUICore", "DesignSystem"]),
         .target(name: "UIKitStyles", dependencies: ["PSUICore"]),
