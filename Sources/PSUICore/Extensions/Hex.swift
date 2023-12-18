@@ -1,6 +1,7 @@
 #if os(iOS)
 import UIKit
 
+/// An extension of UIColor that provides methods for working with hexadecimal color values.
 public extension UIColor {
     /// The hex value of the UIColor
     var hexValue: String? {
@@ -33,6 +34,9 @@ public extension UIColor {
         }
     }
 
+    /// Initializes a `UIColor` with the specified hex value.
+    /// - Parameter hexValue: The hex value to initialize the `UIColor` with.
+    /// - Returns: A new instance of `UIColor`.
     convenience init(hexValue: String) {
         let hex = hexValue.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var uInt64 = UInt64()
@@ -64,6 +68,7 @@ public extension UIColor {
 #if os(macOS)
 import AppKit
 
+/// An extension of NSColor that provides methods for working with hexadecimal color values.
 public extension NSColor {
     /// The hex value of the UIColor
     var hexValue: String? {
@@ -93,6 +98,9 @@ public extension NSColor {
         }
     }
 
+    /// Initializes a `NSColor` with the specified hex value.
+    /// - Parameter hexValue: The hex value to initialize the `NSColor` with.
+    /// - Returns: A new instance of `NSColor`.
     convenience init(hexValue: String) {
         let hex = hexValue.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var uInt64 = UInt64()
@@ -123,9 +131,9 @@ public extension NSColor {
 
 import SwiftUI
 
-@available(iOS 13.0, macOS 10.15, *)
+/// An extension of Color that provides methods for working with hexadecimal color values.
 public extension Color {
-    @available(iOS 14.0, macOS 11.0, *)
+    /// The hex value of the Color
     var hexValue: String? {
 #if canImport(UIKit)
         return UIColor(self).hexValue
@@ -136,7 +144,9 @@ public extension Color {
 #endif
     }
 
-    @available(iOS 15.0, macOS 12.0, *)
+    /// Initializes a `Color` with the specified hex value.
+    /// - Parameter hexValue: The hex value to initialize the `Color` with.
+    /// - Returns: A new instance of `Color`.
     init(hexValue: String) {
 #if canImport(UIKit)
         self = Color(uiColor: UIColor(hexValue: hexValue))

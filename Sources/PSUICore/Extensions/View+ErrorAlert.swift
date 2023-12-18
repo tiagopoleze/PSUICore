@@ -1,8 +1,14 @@
 import SwiftUI
-import PSCore
+import OSLog
 
-@available(iOS 15.0, macOS 12.0, *)
 public extension View {
+    /// Presents an alert to the user when the specified error is non-nil.
+    /// - Parameters:
+    ///  - isPresented: A binding to whether the alert is presented.
+    /// - error: The error to present.
+    /// - buttonTitle: The title of the button that dismisses the alert.
+    /// - buttonAction: The action to perform when the button is tapped.
+    /// - Returns: A new view that presents an alert when the specified error is non-nil.
     func errorAlert(
         error: Binding<Error?>,
         buttonTitle: String = "OK",
@@ -20,7 +26,6 @@ public extension View {
     }
 }
 
-@available(iOS 14.0, macOS 12, *)
 private struct LocalizedAlertError: LocalizedError {
     let underlyingError: LocalizedError
     var errorDescription: String? {
@@ -32,7 +37,7 @@ private struct LocalizedAlertError: LocalizedError {
 
     init?(error: Error?) {
         guard let localizedError = error as? LocalizedError else { return nil }
-        print(localizedError, logLevel: .error)
+        Logger.psUICore.error("\(localizedError)")
         underlyingError = localizedError
     }
 }

@@ -1,9 +1,28 @@
 import SwiftUI
+import DesignSystem
 
+struct PSButtonViewModifier: ButtonStyle {
+    @EnvironmentObject private var designSystem: DesignSystem
+    let cornerRadius: CGFloat
+    let isDisable: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background {
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .foregroundStyle(isDisable
+                                        ? designSystem.colors.primary.default.color().opacity(0.5)
+                                        : designSystem.colors.primary.default.color())
+            }
+    }
+}
+
+// TODO: redo this work
 @available(iOS 15.0, macOS 12.0, *)
 // swiftlint:disable file_length
 public struct PSButton: View {
     @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject private var designSystem: DesignSystem
 
     private let title: String
     private let image: Image?
@@ -40,7 +59,7 @@ public struct PSButton: View {
             label
                 .background {
                     style.background(
-                        colorScheme: colorScheme,
+                        designSystem: designSystem,
                         cornerRadius: cornerRadiusUsed,
                         disable: $disable
                     )
@@ -58,7 +77,7 @@ public struct PSButton: View {
             if loading {
                 ProgressView()
                     .controlSize(buttonSize.controleSize)
-                    .tint(style.tintColor(colorScheme: colorScheme, disable: $disable))
+                    .foregroundStyle(style.tintColor(designSystem: designSystem, disable: $disable))
             } else {
                 Label {
                     Text(title)
@@ -66,7 +85,7 @@ public struct PSButton: View {
                     if let image { image } else { EmptyView() }
                 }
                 .font(buttonSize.font)
-                .foregroundColor(style.tintColor(colorScheme: colorScheme, disable: $disable))
+                .foregroundColor(style.tintColor(designSystem: designSystem, disable: $disable))
             }
         }
     }
@@ -188,6 +207,7 @@ struct PSButton_Previews: PreviewProvider {
             }
         }
         .padding()
+        .environmentObject(DesignSystem.mock)
 
         // swiftlint:disable:next closure_body_length
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -287,6 +307,7 @@ struct PSButton_Previews: PreviewProvider {
         }
         .preferredColorScheme(.dark)
         .padding()
+        .environmentObject(DesignSystem.mock)
 
         // swiftlint:disable:next closure_body_length
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -400,6 +421,7 @@ struct PSButton_Previews: PreviewProvider {
             }
         }
         .padding()
+        .environmentObject(DesignSystem.mock)
 
         // swiftlint:disable:next closure_body_length
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -513,5 +535,6 @@ struct PSButton_Previews: PreviewProvider {
         }
         .preferredColorScheme(.dark)
         .padding()
+        .environmentObject(DesignSystem.mock)
     }
 }

@@ -2,14 +2,14 @@
 import UIKit
 
 public extension UIApplication {
-
+    /// The top view controller in the application.
     static var topNavigationController: UINavigationController? {
 
         let keyWindow: UIWindow?
         if #available(iOS 13, *) {
             keyWindow = UIApplication.shared.connectedScenes
                 .filter { $0.activationState == .foregroundActive }
-                .compactMap {$0 as? UIWindowScene}
+                .compactMap { $0 as? UIWindowScene }
                 .first?.windows
                 .filter { $0.isKeyWindow } .first
         } else {
@@ -34,6 +34,7 @@ public extension UIApplication {
         return getNavigationController(from: viewController)
     }
 
+    /// The top view controller in the application.
     static func topViewController(viewController: UIViewController?) -> UIViewController? {
         if let navigationController = viewController as? UINavigationController {
             return topViewController(viewController: navigationController.visibleViewController)

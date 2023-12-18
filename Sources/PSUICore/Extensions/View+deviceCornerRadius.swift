@@ -1,8 +1,8 @@
 #if os(iOS)
 import SwiftUI
 
-@available(iOS 13.0, *)
 public extension View {
+    /// Returns the corner radius of the device.
     var deviceCornerRadius: CGFloat {
         let key = "_displayCornerRadius"
         if let screen = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.screen {

@@ -1,5 +1,6 @@
 import SwiftUI
 import PSUICore
+import DesignSystem
 
 @available(iOS 15.0, macOS 12.0, *)
 public enum PSButtonStyle {
@@ -10,7 +11,7 @@ public enum PSButtonStyle {
     case danger
 
     func tintColor(
-        colorScheme: ColorScheme,
+        designSystem: DesignSystem,
         disable: Binding<Bool>
     ) -> Color {
         switch self {
@@ -19,27 +20,27 @@ public enum PSButtonStyle {
             let disableColor = Color.white.opacity(0.5)
             return disable.wrappedValue ? disableColor : enableColor
         case .secondary, .tertiary:
-            let enableColor = Color.primaryPS(colorScheme)
-            let disableColor = Color.primaryPS(colorScheme).opacity(0.5)
+            let enableColor = designSystem.colors.primary.default.color()
+            let disableColor = designSystem.colors.primary.default.color().opacity(0.5)
             return disable.wrappedValue ? disableColor : enableColor
         }
     }
 
     @ViewBuilder func background(
-        colorScheme: ColorScheme,
+        designSystem: DesignSystem,
         cornerRadius: CGFloat,
         disable: Binding<Bool>
     ) -> some View {
         switch self {
         case .primary:
-            let enableColor = Color.primaryPS(colorScheme)
-            let disableColor = Color.primaryPS(colorScheme).opacity(0.5)
+            let enableColor = designSystem.colors.primary.default.color()
+            let disableColor = designSystem.colors.primary.default.color().opacity(0.5)
             createRoundedRectangle(
                 cornerRadius: cornerRadius,
                 backgroundColor: disable.wrappedValue ? disableColor : enableColor)
         case .secondary, .tertiary:
-            let enableColor = Color.primaryPS(colorScheme)
-            let disableColor = Color.primaryPS(colorScheme).opacity(0.5)
+            let enableColor = designSystem.colors.primary.default.color()
+            let disableColor = designSystem.colors.primary.default.color().opacity(0.5)
             createRoundedRectangle(
                 cornerRadius: cornerRadius,
                 backgroundColor: disable.wrappedValue ? .gray.opacity(0.7) : .white.opacity(0.001))
@@ -50,14 +51,14 @@ public enum PSButtonStyle {
                     lineWidth: 3)
             })
         case .success:
-            let enableColor = Color.successPS(colorScheme)
-            let disableColor = Color.successPS(colorScheme).opacity(0.5)
+            let enableColor = designSystem.colors.success.default.color()
+            let disableColor = designSystem.colors.success.default.color().opacity(0.5)
             createRoundedRectangle(
                 cornerRadius: cornerRadius,
                 backgroundColor: disable.wrappedValue ? disableColor : enableColor)
         case .danger:
-            let enableColor = Color.dangerPS(colorScheme)
-            let disableColor = Color.dangerPS(colorScheme).opacity(0.5)
+            let enableColor = designSystem.colors.danger.default.color()
+            let disableColor = designSystem.colors.danger.default.color().opacity(0.5)
             createRoundedRectangle(
                 cornerRadius: cornerRadius,
                 backgroundColor: disable.wrappedValue ? disableColor : enableColor)

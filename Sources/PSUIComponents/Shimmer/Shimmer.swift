@@ -1,40 +1,55 @@
 import SwiftUI
 
-@available(iOS 15.0, macOS 12.0, *)
+/// A view that displays a shimmer effect.
 public struct ShimmerConfig {
+    /// The color of the shimmer effect.
     public var tint: Color
+    /// The color of the highlight in the shimmer effect.
     public var highlight: Color
+    /// The amount of blur applied to the shimmer effect. Default value is 5.
     public var blur: CGFloat
+    /// The opacity of the highlight in the shimmer effect. Default value is 1.
     public var highlightOpacity: CGFloat
+    /// The speed of the shimmer effect. Default value is 2.
     public var speed: CGFloat
+    /// The blend mode used for the shimmer effect. Default value is .luminosity.
     public var blendMode: BlendMode
 
-    public init(
-        tint: Color,
-        highlight: Color,
-        blur: CGFloat = 5,
-        highlightOpacity: CGFloat = 1,
-        speed: CGFloat = 2,
-        blendMode: BlendMode = .luminosity
-    ) {
-        self.tint = tint
-        self.highlight = highlight
-        self.blur = blur
-        self.highlightOpacity = highlightOpacity
-        self.speed = speed
-        self.blendMode = blendMode
-    }
+    /// Initializes a Shimmer effect with the specified parameters.
+        ///
+        /// - Parameters:
+        ///   - tint: The color of the shimmer effect.
+        ///   - highlight: The color of the highlight in the shimmer effect.
+        ///   - blur: The amount of blur applied to the shimmer effect. Default value is 5.
+        ///   - highlightOpacity: The opacity of the highlight in the shimmer effect. Default value is 1.
+        ///   - speed: The speed of the shimmer effect. Default value is 2.
+        ///   - blendMode: The blend mode used for the shimmer effect. Default value is .luminosity.
+        public init(
+            tint: Color,
+            highlight: Color,
+            blur: CGFloat = 5,
+            highlightOpacity: CGFloat = 1,
+            speed: CGFloat = 2,
+            blendMode: BlendMode = .luminosity
+        ) {
+            self.tint = tint
+            self.highlight = highlight
+            self.blur = blur
+            self.highlightOpacity = highlightOpacity
+            self.speed = speed
+            self.blendMode = blendMode
+        }
 }
 
-@available(iOS 15.0, macOS 12.0, *)
 public extension View {
-    @ViewBuilder
-    func shimmer(_ config: ShimmerConfig) -> some View {
+    /// Applies a shimmer effect to this view.
+    /// - Parameter config: The shimmer effect configuration.
+    /// - Returns: A view with a shimmer effect.
+    @ViewBuilder func shimmer(_ config: ShimmerConfig) -> some View {
         self.modifier(ShimmerEffectHelper(config: config))
     }
 }
 
-@available(iOS 15.0, macOS 12.0, *)
 private struct ShimmerEffectHelper: ViewModifier {
     var config: ShimmerConfig
     var rotationDegree: Double = -70
@@ -64,7 +79,7 @@ private struct ShimmerEffectHelper: ViewModifier {
                                         )
                                         .blur(radius: config.blur)
                                         .rotationEffect(.degrees(rotationDegree))
-                                        .offset(x: moveTo > 0 ? (geo.size.height / 2.5) :   -(geo.size.height / 2.5))
+                                        .offset(x: moveTo > 0 ? (geo.size.height / 2.5) : -(geo.size.height / 2.5))
                                         .offset(x: geo.size.width * moveTo)
                                 }
                                 .blendMode(config.blendMode)
@@ -84,7 +99,6 @@ private struct ShimmerEffectHelper: ViewModifier {
 }
 
 #if DEBUG
-@available(iOS 15.0, macOS 12.0, *)
 struct ShimmerPreview: PreviewProvider {
     static var previews: some View {
         Text("Shimmer")

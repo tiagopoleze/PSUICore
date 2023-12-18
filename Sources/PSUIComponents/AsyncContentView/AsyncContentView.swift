@@ -1,13 +1,19 @@
 import SwiftUI
 
-@available(iOS 15.0, macOS 12.0, *)
-public struct AsyncContentView<Source: LoadableObject, Content: View>: View {
+/// A view that displays the content of a source asynchronously.
+public struct AsyncContentView<Source: LoadableObject, Content: View> {
     @ObservedObject var source: Source
     var content: (Source.Output) -> Content
-
+    
     @State private var first = true
     let retryHandler: (() -> Void)?
-
+    
+    /// Initializes an `AsyncContentView` with the given parameters.
+    ///
+    /// - Parameters:
+    ///   - source: The source of the content to be displayed.
+    ///   - content: A closure that takes the output of the source and returns the content view to be displayed.
+    ///   - retryHandler: An optional closure that will be called when the content fails to load and the user wants to retry.
     public init(
         source: Source,
         @ViewBuilder content: @escaping (Source.Output) -> Content,
@@ -17,7 +23,9 @@ public struct AsyncContentView<Source: LoadableObject, Content: View>: View {
         self.content = content
         self.retryHandler = retryHandler
     }
+}
 
+extension AsyncContentView: View {
     public var body: some View {
         switch source.state {
         case .idle:
@@ -34,23 +42,22 @@ public struct AsyncContentView<Source: LoadableObject, Content: View>: View {
 }
 
 #if DEBUG
-@available(iOS 15.0, macOS 12.0, *)
 private struct Article: Identifiable {
     var id = UUID()
     var title: String
     var body: String
 }
-@available(iOS 15.0, macOS 12.0, *)
+
 private struct ArticleLoader {
     func loadArticle(withID: Article.ID, _ completion: @escaping (Result<Article, Error>) -> Void) {
-        completion(.success(.init(title: "Hello, World!", body: "TIago Ferreira")))
+        completion(.success(Article(title: "Hello, World!", body: "TIago Ferreira")))
     }
 
     func loadArticle(withID: Article.ID) async throws -> Article {
         throw AsyncArticleError.testError
     }
 }
-@available(iOS 15.0, macOS 12.0, *)
+
 private enum AsyncArticleError: LocalizedError {
     case testError
 
@@ -62,10 +69,11 @@ private enum AsyncArticleError: LocalizedError {
     }
 }
 
-@available(iOS 16.0, macOS 13.0, *)
-private struct AsyncArticleView: View {
+private struct AsyncArticleView {
     @ObservedObject var viewModel: ViewModel
+}
 
+extension AsyncArticleView: View {
     var body: some View {
         AsyncContentView(source: viewModel) { article in
             NavigationStack {
@@ -88,7 +96,6 @@ private struct AsyncArticleView: View {
     }
 }
 
-@available(iOS 16.0, macOS 13.0, *)
 private extension AsyncArticleView {
     class ViewModel: LoadableObject {
         @Published private(set) var state = LoadingState<Article>.idle
@@ -133,10 +140,7 @@ private extension AsyncArticleView {
     }
 }
 
-@available(iOS 16.0, macOS 13.0, *)
-struct AsyncArticleView_Previews: PreviewProvider {
-    static var previews: some View {
-        AsyncArticleView(viewModel: .mock)
-    }
-}
+#Preview(body: {
+    AsyncArticleView(viewModel: .mock)
+})
 #endif

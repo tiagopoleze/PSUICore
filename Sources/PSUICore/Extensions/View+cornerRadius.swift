@@ -1,7 +1,6 @@
 #if os(iOS)
 import SwiftUI
 
-@available(iOS 13.0, *)
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var style: RoundedCornerStyle = .continuous
@@ -17,8 +16,13 @@ struct RoundedCorner: Shape {
     }
 }
 
-@available(iOS 13.0, *)
 public extension View {
+    /// Adds a corner radius to this view.
+    /// - Parameters:
+    /// - radius: The radius of the corner.
+    /// - antialiased: A Boolean value that indicates whether the shape is antialiased.
+    /// - corners: The corners to round.
+    /// - Returns: A new view with a corner radius.
     func cornerRadius(_ radius: CGFloat, antialiased: Bool = true, corners: UIRectCorner) -> some View {
         clipShape(
             RoundedCorner(radius: radius, style: antialiased ? .continuous : .circular, corners: corners)
