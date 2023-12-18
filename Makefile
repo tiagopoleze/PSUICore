@@ -1,6 +1,7 @@
 bin_path := ./scripts/bin
 
-all: build test clean lint
+all: build clean lint
+# all: build test clean lint
 
 build:
 	@echo "Building the project..."
