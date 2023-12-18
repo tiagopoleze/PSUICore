@@ -1,6 +1,6 @@
 bin_path := ./scripts/bin
 
-all: build test clean lint
+all: build clean test clean lint
 
 build:
 	@echo "Building the project..."
@@ -8,6 +8,7 @@ build:
 
 test:
 	@echo "Running tests..."
+
 	swift test
 
 clean:
