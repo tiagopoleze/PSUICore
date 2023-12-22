@@ -7,13 +7,11 @@ let package = Package(
     name: "PSUICore",
     platforms: [.iOS(.v16), .macOS(.v13), .tvOS(.v15), .watchOS(.v7)],
     products: [
-        .library(name: "PSUICore", targets: ["PSUICore", "UIKitStyles", "PSUIComponents", "DesignSystem"])
+        .library(name: "PSUICore", targets: ["PSUICore"])
     ],
+    dependencies: [.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")],
     targets: [
-        .target(name: "PSUICore"),
-        .target(name: "DesignSystem", dependencies: ["PSUICore"], resources: [.copy("Token.json")]),
-        .target(name: "PSUIComponents", dependencies: ["PSUICore", "DesignSystem"]),
-        .target(name: "UIKitStyles", dependencies: ["PSUICore"]),
+        .target(name: "PSUICore", resources: [.copy("DesignSystem/Token.json")]),
         .testTarget(name: "PSUICoreTests", dependencies: ["PSUICore"])
     ]
 )
