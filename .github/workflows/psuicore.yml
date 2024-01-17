@@ -1,10 +1,14 @@
-name: Run Makefile into PSNetwork
+name: Run Makefile into PSUICore
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'PSUICore/**'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'PSUICore/**'
 
 jobs:
   build:
