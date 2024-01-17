@@ -23,4 +23,4 @@ jobs:
 
     - name: Run Make
       run: |
-        make all
+        cd PSUICore && make all
