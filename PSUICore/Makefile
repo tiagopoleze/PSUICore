@@ -1,9 +1,8 @@
 bin_path := ./scripts/bin
-doc_path := ./docs
+doc_path := ./../docs
 my_framework_name := PSUICore
 
 all: build clean lint
-# all: build test clean lint
 
 build:
 	@echo "Building the project..."
@@ -20,7 +19,7 @@ clean:
 
 lint:
 	@echo "Linting the code..."
-	$(bin_path)/swiftlint --format --quiet --config ./.swiftlint.yml
+	$(bin_path)/swiftlint --format --quiet --config ./../.swiftlint.yml
 
 doc:
 	@echo "Generating documentation..."
