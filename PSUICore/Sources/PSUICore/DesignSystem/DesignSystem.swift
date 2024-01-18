@@ -1,34 +1,35 @@
 import SwiftUI
 
-struct MyView: View {
-    let designSystem: DesignSystem
-    
-    var body: some View {
-        SwiftUI.Text("Hi")
-            .font(designSystem.font.preferencial(.body, weight: .medium))
-            .foregroundStyle(designSystem.colors.primary.default.color())
-    }
-}
-
-struct DesignSystemPreview: PreviewProvider {
-    static var previews: some View {
-        MyView(designSystem: try! DesignSystem(fileName: "Token"))
-    }
-}
-
+/// The DesignSystem class represents a collection of design-related properties and configurations.
 public final class DesignSystem: ObservableObject {
     public let colors: DSColor
     public let spacer: DSSpacer
     public let shadow: DSShadow
+    public let cornerRadius: DSCornerRadius
     public let font: DSFont
     
-    public init(colors: DSColor, spacer: DSSpacer, shadow: DSShadow, font: DSFont) {
+    /// Initializes a new instance of the DesignSystem class.
+    /// - Parameters:
+    ///   - colors: The color configuration for the design system.
+    ///   - spacer: The spacing configuration for the design system.
+    ///   - shadow: The shadow configuration for the design system.
+    ///   - cornerRadius: The corner radius configuration for the design system.
+    ///   - font: The font configuration for the design system.
+    public init(colors: DSColor,
+                spacer: DSSpacer,
+                shadow: DSShadow,
+                cornerRadius: DSCornerRadius,
+                font: DSFont) {
         self.colors = colors
         self.spacer = spacer
         self.shadow = shadow
+        self.cornerRadius = cornerRadius
         self.font = font
     }
     
+    /// Initializes a new instance of the DesignSystem class by decoding a JSON file.
+    /// - Parameter fileName: The name of the JSON file to decode.
+    /// - Throws: An error of type DesignSystemError if the decoding process fails.
     init(fileName: String) throws {
         let url = Bundle.module.url(forResource: fileName, withExtension: "json")!
         let data = try! Data(contentsOf: url)
@@ -38,14 +39,17 @@ public final class DesignSystem: ObservableObject {
         colors = decodedDesignSystem.colors
         spacer = decodedDesignSystem.spacer
         shadow = decodedDesignSystem.shadow
+        cornerRadius = decodedDesignSystem.cornerRadius
         font = decodedDesignSystem.font
     }
 }
+
 extension DesignSystem: Codable { }
+
 public extension DesignSystem {
-    /// A mock design system.
+    /// A mock design system for testing purposes.
     static var mock: DesignSystem {
-        DesignSystem(colors: DSColor.mock, spacer: DSSpacer.mock, shadow: DSShadow.mock, font: DSFont())
+        DesignSystem(colors: DSColor.mock, spacer: DSSpacer.mock, shadow: DSShadow.mock, cornerRadius: DSCornerRadius.mock, font: DSFont())
     }
 }
 
